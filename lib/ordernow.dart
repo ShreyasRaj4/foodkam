@@ -1,14 +1,20 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:food_kamp/page2/navbar2.dart';
+import 'package:food_kamp/restraurents.dart';
 
-class OrderNow extends StatelessWidget {
+class OrderNow extends StatefulWidget {
+  OrderNow({Key key}) : super(key: key);
+
+  @override
+  _OrderNowState createState() => _OrderNowState();
+}
+
+class _OrderNowState extends State<OrderNow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 210.0,
+        toolbarHeight: 180.0,
         flexibleSpace: Image(
           image: AssetImage('assets/IMAGES/Group 286.png'),
           fit: BoxFit.cover,
@@ -16,90 +22,47 @@ class OrderNow extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'ORDER NOW',
-                style: TextStyle(
-                  fontSize: 27.0,
-                  color: Colors.blueGrey[700],
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              InkWell(
-                child: Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  clipBehavior: Clip.antiAlias,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Image.asset(
-                        'assets/IMAGES/th (15).png',
-                        height: 141,
-                        fit: BoxFit.fitWidth,
-                      ),
-                      ListTile(
-                        title: Text(
-                          'Tea Post',
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Tea,Coffee,Fast food,Beverages',
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Open Now',
-                                  style: TextStyle(
-                                      color: Colors.lightGreenAccent[400],
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  width: 18.0,
-                                ),
-                                Text(
-                                  '9:00 - 21:00',
-                                  style: TextStyle(
-                                      color: Colors.grey[700],
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NavBar2()),
-                  );
-                },
-              ),
-            ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '   ORDER NOW',
+            style: TextStyle(
+              fontSize: 27.0,
+              color: Colors.deepOrange,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
+          SizedBox(
+            height: 8.0,
+          ),
+          Flexible(
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('restaurants')
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  children: snapshot.data.docs.map((doc) {
+                    return Restraurents(
+                      doc['name'],
+                      doc['image'],
+                      doc['itemType'],
+                      doc['open'],
+                    );
+                  }).toList(),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_kamp/phoneverify.dart';
 import 'home.dart';
-import 'main.dart';
 import 'Sign_Up.dart';
 import 'main2.dart';
 
@@ -25,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController password = TextEditingController();
   bool _obscureText = true;
 
-  @override
+  // @override
   Future loginAuth() async {
     try {
       userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -219,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Color(0xFFf7418c),
                                 ),
                               ],
-                              /* gradient: new LinearGradient(
+                              gradient: new LinearGradient(
                                   colors: [
                                     Color(0xFFf7418c),
                                     Color(0xFFfbab66)
@@ -227,12 +226,12 @@ class _LoginPageState extends State<LoginPage> {
                                   begin: const FractionalOffset(0.2, 0.2),
                                   end: const FractionalOffset(1.0, 1.0),
                                   stops: [0.0, 1.0],
-                                  tileMode: TileMode.clamp), */
+                                  tileMode: TileMode.clamp),
                             ),
                             child: MaterialButton(
                                 highlightColor: Colors.transparent,
                                 splashColor: Color(0xFFf7418c),
-                                //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                             // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 10.0, horizontal: 42.0),

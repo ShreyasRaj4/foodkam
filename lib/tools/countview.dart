@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 typedef void CountButtonClickCallBack(int count);
+
 class CountButtonView extends StatefulWidget {
   final int initialCount;
   final CountButtonClickCallBack onChange;
@@ -7,6 +9,7 @@ class CountButtonView extends StatefulWidget {
   @override
   _CountButtonViewState createState() => _CountButtonViewState();
 }
+
 class _CountButtonViewState extends State<CountButtonView> {
   int count;
   @override
@@ -14,10 +17,12 @@ class _CountButtonViewState extends State<CountButtonView> {
     super.initState();
     count = widget.initialCount;
   }
+
   @override
   void dispose() {
     super.dispose();
   }
+
   void updateCount(int addValue) {
     if (count + addValue >= 0) {
       setState(() {
@@ -28,6 +33,7 @@ class _CountButtonViewState extends State<CountButtonView> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -42,24 +48,26 @@ class _CountButtonViewState extends State<CountButtonView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               GestureDetector(
-                  onTap: () {
-                    updateCount(-1);
-                  },
-                  child: Container(
-                      width: 20.0,
-                      child: Center(
-                          child: Icon(Icons.remove,color: Colors.orange,)
-                      ))),
+                onTap: () {
+                  updateCount(-1);
+                },
+                child: Container(
+                  width: 20.0,
+                  child: Center(
+                    child: Icon(Icons.remove, color: Colors.orange),
+                  ),
+                ),
+              ),
               Container(
                 child: Center(
                     child: Text(
-                      '$count',
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orange,
-                          decoration: TextDecoration.none),
-                    )),
+                  '$count',
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange,
+                      decoration: TextDecoration.none),
+                )),
               ),
               GestureDetector(
                   onTap: () {
@@ -68,8 +76,10 @@ class _CountButtonViewState extends State<CountButtonView> {
                   child: Container(
                       width: 22.0,
                       child: Center(
-                          child: Icon(Icons.add,color: Colors.orange,)
-                      ))),
+                          child: Icon(
+                        Icons.add,
+                        color: Colors.orange,
+                      )))),
             ],
           ),
         ),

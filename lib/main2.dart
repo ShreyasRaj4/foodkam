@@ -1,14 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'ordernow.dart';
 import 'profile.dart';
 import 'yourorders.dart';
-/*void main() {
-  runApp(MaterialApp(
-    home: NavBar(),
-  ));
-}*/
+
 class NavBar extends StatefulWidget {
   @override
   _NavBarState createState() => _NavBarState();
@@ -16,7 +11,7 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   int _currentIndex = 0;
-  final List<Widget> _children = [OrderNow(),YourOrders(),Profile()];
+  final List<Widget> _children = [OrderNow(), YourOrders(), Profile()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,33 +25,24 @@ class _NavBarState extends State<NavBar> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),
-            title: Text('Order now'),
+            label: 'Order now',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_basket_rounded),
-            title: Text('Your orders'),
+            label: 'Your orders',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile')
+            icon: Icon(Icons.person),
+            label: 'Profile',
           )
         ],
       ),
     );
-
   }
+
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
 }
-
-
-
-
-
-
-
-
-
