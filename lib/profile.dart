@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:food_kamp/AboutUs.dart';
-import 'package:food_kamp/feedback.dart';
-import 'package:food_kamp/wallet.dart';
-import 'login.dart';
+import 'package:food_kamp/auth/login.dart';
+import 'package:food_kamp/profileScreen/AboutUs.dart';
+import 'package:food_kamp/profileScreen/feedback.dart';
+import 'package:food_kamp/profileScreen/wallet.dart';
 
 class Profile extends StatelessWidget {
   User _user = FirebaseAuth.instance.currentUser;

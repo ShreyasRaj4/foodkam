@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-import 'Sign_Up.dart';
-import 'home.dart';
+import 'sign_up.dart';
 
 class OTP extends StatefulWidget {
   final String phone;
